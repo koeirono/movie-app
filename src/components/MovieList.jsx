@@ -1,16 +1,28 @@
 import MovieItem from "./MovieItem";
 
-const MovieList = ({ movies }) => {
-  if (!movies || movies.length === 0) {
-    return <p className="text-light">No movies found.</p>;
-  }
-
+const MovieList = ({ movies, onDelete }) => {
   return (
-    <div className="d-flex overflow-auto">
+    <>
       {movies.map((movie) => (
-        <MovieItem key={movie.imdbID} movie={movie} />
+        <div
+          key={movie.imdbID}
+          className="d-flex flex-column align-items-center m-3"
+          style={{ width: "150px" }}
+        >
+          <img
+            src={movie.Poster}
+            alt={movie.Title}
+            style={{ width: "100%", borderRadius: "8px" }}
+          />
+          <button
+            className="btn btn-danger btn-sm mt-2"
+            onClick={() => onDelete(movie.imdbID)}
+          >
+            Delete
+          </button>
+        </div>
       ))}
-    </div>
+    </>
   );
 };
 

@@ -11,36 +11,34 @@ const App = () => {
   const [movies, setMovies] = useState([]);
   const [searchValue, setSearchValue] = useState("");
 
+  const handleDelete = (id) => {
+    setMovies(movies.filter((movie) => movie.imdbID !== id));
+  };
+
   const getMovieRequest = async (searchValue) => {
     const url = `https://www.omdbapi.com/?s=${searchValue}&apikey=9287f59a`;
+    const response = await fetch(url);
+    const responseJson = await response.json();
 
-    const response = await fetch(url)
-    const responseJson =await response.json();
-    if(responseJson){
-      setMovies(responseJson.Search)
+    if (responseJson.Search) {
+      setMovies(responseJson.Search);
     }
+  };
 
-    setMovies(responseJson.Search)
-
-
-  }
-
-  useEffect(()=>{
-    getMovieRequest(searchValue );
+  useEffect(() => {
+    getMovieRequest(searchValue);
   }, [searchValue]);
 
   return (
-    <>
-      <div className="container-fluid movie-app">
-        <div className="row d-flex align-items-center mt-4 mb-">
-          <MovieListHeading heading="Movies"/>
-          <SearchBox searchValue={searchValue} setSearchValue={setSearchValue}/>
-        </div>
-        <div className="row">
-          <MovieList movies={movies} />
-        </div>
+    <div className="container-fluid movie-app">
+      <div className="row d-flex align-items-center mt-4 mb-">
+        <MovieListHeading heading="Movies" />
+        <SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
       </div>
-    </>
+      <div className="row">
+        <MovieList movies={movies} onDelete={handleDelete} />
+      </div>
+    </div>
   );
 };
 
