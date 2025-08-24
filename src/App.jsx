@@ -40,8 +40,7 @@ const App = () => {
         <SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
       </div>
       <AddMovie onAdd={handleAdd} />
-
-      <div className="row">
+       <div className="row">
         <MovieList movies={movies} onDelete={handleDelete} />
       </div>
     </div>
