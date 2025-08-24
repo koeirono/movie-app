@@ -14,6 +14,7 @@ const MovieList = ({ movies, onDelete }) => {
             alt={movie.Title}
             style={{ width: "100%", borderRadius: "8px" }}
           />
+          
           <button
             className="btn btn-danger btn-sm mt-2"
             onClick={() => onDelete(movie.imdbID)}
