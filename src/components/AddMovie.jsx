@@ -19,7 +19,6 @@ const AddMovie = ({ onAdd }) => {
         setTitle("");
         setPoster("");
     };
-
     return (
         <form
             className="d-flex flex-column align-items-start gap-2 mt-3"
